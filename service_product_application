@@ -1,3 +1,10 @@
+spring:
+  profiles:
+    active:
+      - dev
+
+---
+
 server:
   port: 8002
 spring:
@@ -8,12 +15,36 @@ spring:
     url: jdbc:mysql://localhost:3306/aigou?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
-mybatis-plus:
-  mapper-locations: classpath:cn/li/aigou/mapper/*Mapper.xml
-  type-aliases-package: cn.li.aigou.domain,cn.li.aigou.query
+  profiles: dev
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://localhost:7001/eureka  #告诉服务提供者要把服务注册到哪儿 #单机环境
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: true #显示客户端真实ip
+mybatis-plus:
+  mapper-locations: classpath:cn/li/aigou/mapper/*Mapper.xml
+  type-aliases-package: cn.li.aigou.domain,cn.li.aigou.query
+
+---
+
+server:
+  port: 8022
+spring:
+  application:
+    name: service_product_application-test
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/aigou?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+  profiles: test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #告诉服务提供者要把服务注册到哪儿 #单机环境
+  instance:
+    prefer-ip-address: true #显示客户端真实ip
+mybatis-plus:
+  mapper-locations: classpath:cn/li/aigou/mapper/*Mapper.xml
+  type-aliases-package: cn.li.aigou.domain,cn.li.aigou.query
