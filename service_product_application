@@ -1,21 +1,19 @@
 spring:
   profiles:
     active:
-      - dev
-
+      -dev
 ---
-
 server:
   port: 8002
 spring:
   application:
-    name: service_product_application
+    name: PRODUCT_APPLICATION
+  profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/aigou?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
-  profiles: dev
 eureka:
   client:
     service-url:
