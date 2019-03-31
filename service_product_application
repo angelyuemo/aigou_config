@@ -5,12 +5,12 @@ spring:
     name: service_product_application
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/aigou_product?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/aigou?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
 mybatis-plus:
-  mapper-locations: classpath:cn/itsource/mapper/*Mapper.xml
-  type-aliases-package: cn.itsource.domain,cn.itsource.query
+  mapper-locations: classpath:cn/li/aigou/mapper/*Mapper.xml
+  type-aliases-package: cn.li.aigou.domain,cn.li.aigou.query
 eureka:
   client:
     service-url:
