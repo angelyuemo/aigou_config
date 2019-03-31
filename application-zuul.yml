@@ -2,46 +2,48 @@ spring:
   profiles:
     active: dev
 ---
-spring:
-  profiles: dev
-  application:
-      name: microservice-zuul-gateway
 server:
   port: 9527
+spring:
+  application:
+    name: microservice-zuul-gateway
+  profiles: dev
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://localhost:7001/eureka  #告诉服务提供者要把服务注册到哪儿 #单机环境
   instance:
-    instance-id: gateway-9527.com
-    prefer-ip-address: true
+    prefer-ip-address: true #显示客户端真实ip
+    instance-id: gateway-9527
 zuul:
   routes:
     aigouEmployee.serviceId: employee-provider
     aigouEmployee.path: /employee/**  # 匹配 /xxx开头的请求映射到user-provider服务上
+    product.serviceId: product_application
+    product.path: /product/**
   ignored-services: "*" #user-provider #忽略直接使用服务名访问  *忽略所有的
-  prefix: /aigou   # 访问前缀
+  prefix: "/aigou"   # 访问前缀
 
 ---
-spring:
-  profiles: test
-  application:
-      name: microservice-zuul-gateway-test
 server:
-  port: 9528
+  port: 9529
+spring:
+  application:
+    name: microservice-zuul-gateway
+  profiles: test
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://localhost:7001/eureka  #告诉服务提供者要把服务注册到哪儿 #单机环境
   instance:
-    instance-id: gateway-9527.com
-    prefer-ip-address: true
+    prefer-ip-address: true #显示客户端真实ip
+    instance-id: gateway-9527
 zuul:
   routes:
     aigouEmployee.serviceId: employee-provider
     aigouEmployee.path: /employee/**  # 匹配 /xxx开头的请求映射到user-provider服务上
-    aigouEmployee.serviceId: product_application
-    aigouEmployee.path: /brand/**  # 匹配 /xxx开头的请求映射到user-provider服务上
+    product.serviceId: product_application
+    product.path: /product/**
   ignored-services: "*" #user-provider #忽略直接使用服务名访问  *忽略所有的
-  prefix: /aigou   # 访问前缀
+  prefix: "/aigou"   # 访问前缀
  
